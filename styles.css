@@ -158,6 +158,12 @@ body {
     /* Ensure preview is first on small screens */
     .preview-wrapper { order: 1; }
     .input-section { order: 2; }
+    /* Smaller progress UI on mobile */
+    .progress-indicator { margin-bottom: 0.75rem; padding: 0 0.5rem; }
+    .progress-steps { gap: 6px; margin-bottom: 0.5rem; }
+    .step-number { width: 26px; height: 26px; font-size: 0.75rem; margin-bottom: 0.25rem; }
+    .step-label { font-size: 0.65rem; }
+    .progress-bar { height: 3px; }
 }
 
 /* Form Styling */
@@ -459,18 +465,9 @@ input:focus, textarea:focus, select:focus {
 }
 
 /* Progress Indicator */
-.progress-indicator {
-    margin-bottom: 2rem;
-    padding: 0 1rem;
-}
+.progress-indicator { margin-bottom: 2rem; padding: 0 1rem; }
 
-.progress-steps {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-    position: relative;
-}
+.progress-steps { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; position: relative; }
 
 .step {
     display: flex;
@@ -497,21 +494,7 @@ input:focus, textarea:focus, select:focus {
     background: #4CAF50;
 }
 
-.step-number {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: #e0e0e0;
-    color: #666;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    font-size: 0.9rem;
-    position: relative;
-    z-index: 2;
-}
+.step-number { width: 40px; height: 40px; border-radius: 50%; background: #e0e0e0; color: #666; display: flex; align-items: center; justify-content: center; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem; position: relative; z-index: 2; }
 
 .step.active .step-number {
     background: #2196F3;
@@ -1056,10 +1039,22 @@ select.error {
         height: 50px;
     }
     
+    .resume-preview { width: 100%; height: auto; aspect-ratio: 8.5 / 11; }
+    .preview-section { width: 100%; }
     .resume-content {
         padding: 20px;
         font-size: 9pt;
     }
+    
+    /* Reorder: show form inputs first, then progress bar, then nav */
+    .input-section { display: flex; flex-direction: column; }
+    .input-section .form-container { order: 1; }
+    .input-section .progress-indicator { order: 2; margin-top: 6px; margin-bottom: 10px; padding: 0; }
+    .input-section .carousel-navigation { order: 3; }
+    
+    /* Compact progress bar: one thin line across screen */
+    .progress-steps { display: none; }
+    .progress-bar { height: 2px; }
     
     .entry-header {
         flex-direction: column;
@@ -1068,14 +1063,28 @@ select.error {
 }
 
 @media (max-width: 480px) {
-    .section-group {
-        padding: 10px;
-    }
+    /* Maintain same mobile ordering on very small devices */
+    .input-section { display: flex; flex-direction: column; }
+    .input-section .form-container { order: 1; }
+    .input-section .progress-indicator { order: 2; margin-top: 6px; margin-bottom: 8px; padding: 0; }
+    .input-section .carousel-navigation { order: 3; }
+    .progress-steps { display: none; }
+    .progress-bar { height: 2px; }
+    /* Even smaller progress UI on very small phones */
+    .progress-indicator { margin-bottom: 0.5rem; padding: 0 0.5rem; }
+    .progress-steps { gap: 4px; }
+    .step-number { width: 22px; height: 22px; font-size: 0.7rem; }
+    .step-label { font-size: 0.6rem; }
+    .progress-bar { height: 2px; }
+    .section-group { padding: 10px; }
     
-    .resume-content {
-        padding: 15px;
-        font-size: 8.5pt;
-    }
+    .resume-preview { width: 100%; height: auto; aspect-ratio: 8.5 / 11; }
+    .preview-section { width: 100%; }
+    .input-section { max-width: 100%; padding: 0 8px; margin: 0; }
+    .form-container { width: 100%; }
+    .form-row { grid-template-columns: 1fr; gap: 8px; }
+    input, textarea, select { width: 100%; }
+    .resume-content { padding: 15px; font-size: 8.5pt; }
     
     .container { padding: 10px; }
     input, textarea, select { padding: 9px; font-size: 0.9rem; }
