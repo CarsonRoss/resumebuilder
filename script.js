@@ -160,49 +160,48 @@ function updateSkillsSuggestions(category) {
 
 // Update experience bullet suggestions
 function updateExperienceSuggestions(category) {
-    const bullets = JOB_DATA.getBulletSuggestions(category);
+    const bullets = JOB_DATA.getBulletSuggestions(category) || [];
 
     document
         .querySelectorAll(".achievements-suggestions")
         .forEach((container, index) => {
-            if (bullets.length === 0) {
-                container.innerHTML = "";
-                return;
-            }
-
             // Get currently used bullet points for this experience
             const usedBullets = getUsedBulletPoints(index);
 
-            // Filter out already used bullets
+            // Filter out already used static bullets
             const availableBullets = bullets.filter(
                 (bullet) => !usedBullets.includes(bullet),
             );
 
-            if (availableBullets.length === 0) {
-                container.innerHTML =
-                    '<h4>Bullet Point Suggestions:</h4><p class="no-suggestions">All suggestions have been added. Delete bullet points to see more suggestions.</p>';
-                return;
-            }
-
             let html = "<h4>Bullet Point Suggestions:</h4>";
-            // AI suggestions section
+            let renderedAny = false;
+
+            // AI suggestions section (even if no static suggestions)
             if (aiSuggestionsLoading) {
                 html += '<div class="suggestion-item loading">Generating AI suggestions…</div>';
+                renderedAny = true;
             } else if (aiBulletSuggestions.length > 0) {
                 html += '<div class="suggestion-group"><div class="suggestion-group-title">AI Suggestions</div>';
                 aiBulletSuggestions.slice(0, 4).forEach((bullet) => {
                     html += `<div class="suggestion-item" onclick="addBulletPoint(${index}, '${bullet.replace(/'/g, "\\'")}')">• ${bullet}</div>`;
                 });
                 html += '</div>';
+                renderedAny = true;
             }
-            // Static suggestions section
-            html += '<div class="suggestion-group"><div class="suggestion-group-title">More Suggestions</div>';
-            availableBullets.slice(0, 6).forEach((bullet) => {
-                html += `<div class="suggestion-item" onclick="addBulletPoint(${index}, '${bullet.replace(/'/g, "\\'")}')">
-                • ${bullet}
-            </div>`;
-            });
-            html += '</div>';
+
+            // Static suggestions section if any remain
+            if (availableBullets.length > 0) {
+                html += '<div class="suggestion-group"><div class="suggestion-group-title">More Suggestions</div>';
+                availableBullets.slice(0, 6).forEach((bullet) => {
+                    html += `<div class="suggestion-item" onclick="addBulletPoint(${index}, '${bullet.replace(/'/g, "\\'")}')">• ${bullet}</div>`;
+                });
+                html += '</div>';
+                renderedAny = true;
+            }
+
+            if (!renderedAny && !aiSuggestionsLoading) {
+                html += '<p class="no-suggestions">No suggestions yet. Try a more specific job title.</p>';
+            }
 
             container.innerHTML = html;
         });
