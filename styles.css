@@ -342,6 +342,8 @@ input:focus, textarea:focus, select:focus {
     font-weight: 500;
 }
 
+.ai-status { margin-top: 8px; font-size: 0.85rem; color: #64748b; }
+
 /* Suggestions */
 .suggestions {
     margin-top: 10px;

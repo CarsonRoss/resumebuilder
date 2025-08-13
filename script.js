@@ -107,6 +107,14 @@ function handleJobTitleChange(event) {
     updateResumePreview();
     // Trigger AI bullet suggestions based on the entered job title
     requestAIBullets(jobTitle);
+    const aiStatus = document.getElementById("aiStatus");
+    if (aiStatus) {
+        if (jobTitle.length >= 2) {
+            aiStatus.textContent = aiSuggestionsLoading ? "Generating AI suggestions…" : "";
+        } else {
+            aiStatus.textContent = "";
+        }
+    }
 }
 
 // Update suggestions based on job classification
@@ -1270,11 +1278,15 @@ async function requestAIBullets(jobTitle) {
         aiBulletSuggestions = [];
         aiSuggestionsLoading = false;
         updateExperienceSuggestions(currentJobClassification ? currentJobClassification.category : '');
+        const aiStatus = document.getElementById("aiStatus");
+        if (aiStatus) aiStatus.textContent = "";
         return;
     }
     try {
         aiSuggestionsLoading = true;
         updateExperienceSuggestions(currentJobClassification ? currentJobClassification.category : '');
+        const aiStatus = document.getElementById("aiStatus");
+        if (aiStatus) aiStatus.textContent = "Generating AI suggestions…";
 		const response = await fetch('/.netlify/functions/generate-bullets', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -1289,6 +1301,8 @@ async function requestAIBullets(jobTitle) {
     } finally {
         aiSuggestionsLoading = false;
         updateExperienceSuggestions(currentJobClassification ? currentJobClassification.category : '');
+        const aiStatus = document.getElementById("aiStatus");
+        if (aiStatus) aiStatus.textContent = aiBulletSuggestions.length ? "AI suggestions ready" : "";
     }
 }
 
