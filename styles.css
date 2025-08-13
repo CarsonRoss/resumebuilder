@@ -1027,8 +1027,23 @@ select.error {
         grid-template-columns: 1fr;
     }
     
+    /* Condense form and make it span full width */
+    .input-section { max-width: 100%; padding: 0 8px; margin: 0; }
+    .form-container { width: 100%; }
+    .form-container h2 { font-size: 1.3rem; margin-bottom: 16px; }
+    .section-group { padding: 12px; margin-bottom: 12px; }
+    .section-group h3 { font-size: 1.1rem; margin-bottom: 12px; }
+    .form-group { margin-bottom: 12px; }
+    .form-row { gap: 10px; }
+    input, textarea, select { padding: 10px; font-size: 0.95rem; }
+    .suggestions { padding: 12px; }
+    .carousel-navigation { padding: 0.5rem 0.75rem; }
+    .nav-btn { padding: 0.7rem 1rem; font-size: 0.85rem; }
+    
     .action-buttons {
         flex-direction: column;
+        padding: 12px;
+        gap: 10px;
     }
     
     .share-buttons {
@@ -1054,13 +1069,17 @@ select.error {
 
 @media (max-width: 480px) {
     .section-group {
-        padding: 15px;
+        padding: 10px;
     }
     
     .resume-content {
         padding: 15px;
         font-size: 8.5pt;
     }
+    
+    .container { padding: 10px; }
+    input, textarea, select { padding: 9px; font-size: 0.9rem; }
+    .nav-btn { padding: 0.6rem 0.9rem; font-size: 0.8rem; }
     
     .resume-name {
         font-size: 18pt;
