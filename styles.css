@@ -1,0 +1,1098 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8fafc;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header */
+.main-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.main-header h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #2563eb;
+    margin-bottom: 10px;
+}
+
+.main-header p {
+    font-size: 1.1rem;
+    color: #64748b;
+}
+
+/* Ad Spaces */
+.ad-space {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.ad-placeholder {
+    background: #f1f5f9;
+    border: 2px dashed #cbd5e1;
+    padding: 20px;
+    text-align: center;
+    color: #64748b;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.top-ad .ad-placeholder, .bottom-ad .ad-placeholder {
+    width: 728px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.side-ad {
+    position: sticky;
+    top: 20px;
+}
+
+.side-ad .ad-placeholder {
+    width: 300px;
+    height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+}
+
+/* Main Content Layout */
+.app-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 30px 0;
+    gap: 40px;
+}
+
+.input-section {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.form-container {
+    width: 100%;
+}
+
+.preview-wrapper {
+    display: grid;
+    grid-template-columns: 300px 1fr 300px;
+    gap: 20px;
+    width: 100%;
+    max-width: 1400px;
+    align-items: start;
+}
+
+.side-ad {
+    position: sticky;
+    top: 20px;
+}
+
+/* Removed duplicate - main preview-section rule is below */
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .preview-wrapper {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .side-ad {
+        display: none;
+    }
+    
+    .preview-section {
+        max-width: 100%;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .input-section {
+        max-width: 100%;
+        padding: 0 10px;
+    }
+    
+    .progress-steps {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .step {
+        min-width: 80px;
+    }
+    
+    .step-label {
+        font-size: 0.7rem;
+    }
+    
+    .step-number {
+        width: 30px;
+        height: 30px;
+        font-size: 0.8rem;
+    }
+}
+
+/* Form Styling */
+.form-container h2 {
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+    color: #1e293b;
+}
+
+.section-group {
+    margin-bottom: 15px;
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.section-group h3 {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    color: #374151;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 8px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group.priority {
+    background: linear-gradient(135deg, #dbeafe 0%, #ede9fe 100%);
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #3b82f6;
+    margin-bottom: 25px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #374151;
+}
+
+label i {
+    margin-right: 8px;
+    color: #3b82f6;
+}
+
+input, textarea, select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Tooltips */
+.tooltip {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: #3b82f6;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 20px;
+    font-size: 12px;
+    cursor: help;
+    position: relative;
+    margin-left: 5px;
+}
+
+.tooltip:hover::after {
+    content: attr(data-tip);
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1e293b;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 1000;
+}
+
+/* Character Count */
+.char-count {
+    float: right;
+    font-size: 0.9rem;
+    color: #64748b;
+}
+
+/* GPA Warning */
+.gpa-warning {
+    margin-top: 5px;
+    padding: 8px 12px;
+    background: #fef3c7;
+    border: 1px solid #f59e0b;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    color: #92400e;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.gpa-warning i {
+    color: #f59e0b;
+}
+
+/* Phone Number, Email, and Date Validation */
+.phone-validation, .email-validation, .date-validation {
+    margin-top: 5px;
+    padding: 8px 12px;
+    background: #fee2e2;
+    border: 1px solid #ef4444;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    color: #991b1b;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.phone-validation i, .email-validation i, .date-validation i {
+    color: #ef4444;
+}
+
+.phone-validation.phone-valid, .email-validation.email-valid, .date-validation.date-valid {
+    background: #dcfce7;
+    border-color: #10b981;
+    color: #065f46;
+}
+
+.phone-validation.phone-valid i, .email-validation.email-valid i, .date-validation.date-valid i {
+    color: #10b981;
+}
+
+/* Future date warning (informational, not error) */
+.date-validation.date-future {
+    background: #fef3c7;
+    border-color: #f59e0b;
+    color: #92400e;
+}
+
+.date-validation.date-future i {
+    color: #f59e0b;
+}
+
+/* Job Category Display */
+.job-category {
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: #ecfdf5;
+    border: 1px solid #10b981;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    color: #065f46;
+    font-weight: 500;
+}
+
+/* Suggestions */
+.suggestions {
+    margin-top: 10px;
+    padding: 15px;
+    background: #f8fafc;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
+
+.suggestions h4 {
+    font-size: 0.9rem;
+    color: #475569;
+    margin-bottom: 8px;
+}
+
+.suggestion-group { margin-bottom: 8px; }
+.suggestion-group-title { font-size: 0.85rem; color: #64748b; margin: 6px 0; font-weight: 600; }
+.suggestion-item.loading { opacity: 0.7; font-style: italic; }
+
+.suggestion-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.suggestion-tag {
+    background: #e0e7ff;
+    color: #3730a3;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.suggestion-tag:hover {
+    background: #c7d2fe;
+}
+
+/* Experience and Education Items */
+.experience-item, .education-item {
+    background: #fafafa;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+/* Buttons */
+.btn-primary, .btn-secondary, .add-btn, .remove-btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-primary {
+    background: #3b82f6;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #2563eb;
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background: #6b7280;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #4b5563;
+}
+
+.add-btn {
+    background: #10b981;
+    color: white;
+    width: 100%;
+    justify-content: center;
+}
+
+.add-btn:hover {
+    background: #059669;
+}
+
+.remove-btn {
+    background: #ef4444;
+    color: white;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 6px 12px;
+    font-size: 0.9rem;
+}
+
+.remove-btn:hover {
+    background: #dc2626;
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.action-buttons button {
+    flex: 1;
+}
+
+/* Progress Indicator */
+.progress-indicator {
+    margin-bottom: 2rem;
+    padding: 0 1rem;
+}
+
+.progress-steps {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    position: relative;
+    z-index: 2;
+}
+
+.step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: calc(50% + 25px);
+    width: calc(100% - 50px);
+    height: 2px;
+    background: #e0e0e0;
+    z-index: 1;
+}
+
+.step.active:not(:last-child)::after,
+.step.completed:not(:last-child)::after {
+    background: #4CAF50;
+}
+
+.step-number {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #e0e0e0;
+    color: #666;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    position: relative;
+    z-index: 2;
+}
+
+.step.active .step-number {
+    background: #2196F3;
+    color: white;
+}
+
+.step.completed .step-number {
+    background: #4CAF50;
+    color: white;
+}
+
+.step-label {
+    font-size: 0.8rem;
+    color: #666;
+    font-weight: 500;
+    text-align: center;
+}
+
+.step.active .step-label {
+    color: #2196F3;
+    font-weight: 600;
+}
+
+.step.completed .step-label {
+    color: #4CAF50;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 4px;
+    background: #e0e0e0;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #2196F3, #4CAF50);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+/* Carousel Container */
+.carousel-container {
+    position: relative;
+    overflow: hidden;
+    min-height: auto;
+}
+
+.carousel-step {
+    display: none;
+    opacity: 0;
+    transform: translateX(50px);
+    transition: all 0.3s ease;
+    padding: 1rem 0;
+}
+
+.carousel-step.active {
+    display: block;
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.carousel-step h2 {
+    color: #333;
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.carousel-step h2 i {
+    color: #2196F3;
+}
+
+.step-description {
+    color: #666;
+    margin-bottom: 2rem;
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+/* Navigation Buttons */
+.carousel-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.5rem;
+    padding: 0.75rem 1rem;
+    border-top: 1px solid #e0e0e0;
+}
+
+/* Validation Error Message */
+.validation-error {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #dc2626;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin: 10px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+
+.validation-error i {
+    margin-right: 8px;
+}
+
+/* Form Field Error State */
+input.error,
+textarea.error,
+select.error {
+    border-color: #ef4444 !important;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important;
+}
+
+/* Button disabled validation state */
+.nav-btn.disabled-validation {
+    background: #f3f4f6 !important;
+    color: #9ca3af !important;
+    cursor: not-allowed !important;
+    opacity: 0.7;
+}
+
+.nav-btn {
+    background: #2196F3;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav-btn:hover:not(:disabled) {
+    background: #1976D2;
+    transform: translateY(-1px);
+}
+
+.nav-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.nav-btn i {
+    font-size: 0.8rem;
+}
+
+/* Preview Section */
+.preview-section {
+    position: sticky;
+    top: 20px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.preview-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 15px;
+}
+
+.preview-header h2 {
+    font-size: 1.5rem;
+    color: #1e293b;
+}
+
+.template-selector select {
+    padding: 8px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 0.9rem;
+}
+
+.preview-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Page control elements removed - single fixed page only */
+
+.resume-preview {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 8.5in;
+    height: 11in;
+    overflow: hidden;
+    position: relative;
+    box-sizing: border-box;
+}
+
+/* Multi-page functionality removed - single fixed page only */
+
+.resume-content {
+    padding: 36px;
+    font-size: 10pt;
+    line-height: 1.4;
+    color: #1e293b;
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+/* Page break indicators for multi-page mode */
+.page-break {
+    border-top: 2px dashed #e5e7eb;
+    margin: 20px 0;
+    padding-top: 20px;
+    position: relative;
+}
+
+.page-break::before {
+    content: "Page " attr(data-page);
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    padding: 0 10px;
+    font-size: 8pt;
+    color: #9ca3af;
+    font-weight: 500;
+}
+
+/* Multi-page layout styles */
+.resume-page::before {
+    content: "Page " attr(data-page);
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #f3f4f6;
+    padding: 4px 12px;
+    font-size: 10px;
+    color: #6b7280;
+    font-weight: 500;
+    border-radius: 12px;
+    z-index: 10;
+}
+
+/* Dynamic sizing removed - using fixed fonts and dimensions */
+
+/* No suggestions message */
+.no-suggestions {
+    color: #6b7280;
+    font-style: italic;
+    font-size: 0.9rem;
+    margin: 10px 0;
+}
+
+.preview-placeholder {
+    text-align: center;
+    color: #64748b;
+    padding: 100px 20px;
+}
+
+.preview-placeholder i {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    opacity: 0.3;
+}
+
+/* Resume Styles */
+.resume-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.header-left { display: flex; flex-direction: column; gap: 6px; }
+.header-right { display: flex; flex-direction: column; gap: 6px; text-align: right; align-items: flex-end; }
+
+.resume-name {
+    font-size: 11pt;
+    font-weight: 600;
+    color: #1e293b;
+    letter-spacing: 0.5px;
+}
+
+.resume-linkedin {
+    font-size: 11pt;
+    color: #4b5563;
+}
+
+.resume-email, .resume-phone {
+    font-size: 11pt;
+    color: #4b5563;
+}
+
+.resume-location { font-size: 11pt; color: #4b5563; }
+.resume-contact-line { font-size: 11pt; color: #4b5563; }
+
+.resume-section {
+    margin-bottom: 20px;
+}
+
+.resume-section-title {
+    font-size: 11pt;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    color: #374151;
+    border-bottom: 1px solid #d1d5db;
+    padding-bottom: 3px;
+}
+
+.resume-summary {
+    text-align: justify;
+    margin-bottom: 15px;
+}
+
+.experience-entry, .education-entry {
+    margin-bottom: 15px;
+}
+
+.entry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 5px;
+}
+
+.entry-title {
+    font-weight: 600;
+    font-size: 10pt;
+}
+
+.entry-company {
+    font-weight: 500;
+    font-size: 10pt;
+}
+
+.entry-date {
+    font-size: 9pt;
+    color: #4b5563;
+    font-style: italic;
+}
+
+.entry-location {
+    font-size: 11pt;
+    color: #6b7280;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.entry-achievements ul {
+    margin-left: 15px;
+    margin-top: 5px;
+}
+
+.entry-achievements li {
+    margin-bottom: 3px;
+    font-size: 9.5pt;
+}
+
+.skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.skill-item {
+    background: #f3f4f6;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 9pt;
+    color: #374151;
+}
+
+/* Template Variations */
+.resume-content.modern .resume-section-title {
+    color: #3b82f6;
+    border-bottom-color: #3b82f6;
+}
+
+.resume-content.modern .resume-name {
+    color: #1e40af;
+}
+
+.resume-content.modern .resume-header {
+    border-bottom-color: #93c5fd;
+}
+
+.resume-content.classic .resume-section-title {
+    color: #1f2937;
+    border-bottom-color: #1f2937;
+}
+
+.resume-content.minimal .resume-section-title {
+    color: #6b7280;
+    border-bottom: none;
+    font-weight: 400;
+    margin-bottom: 12px;
+}
+
+/* Social Sharing */
+.social-sharing {
+    text-align: center;
+    margin: 40px 0 20px;
+    padding: 25px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.social-sharing h3 {
+    margin-bottom: 15px;
+    color: #374151;
+}
+
+.share-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.share-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.share-btn:hover {
+    transform: translateY(-2px);
+}
+
+.share-btn.facebook { background: #1877f2; }
+.share-btn.twitter { background: #1da1f2; }
+.share-btn.linkedin { background: #0077b5; }
+
+/* Footer */
+.main-footer {
+    text-align: center;
+    padding: 20px;
+    color: #64748b;
+    border-top: 1px solid #e5e7eb;
+    margin-top: 40px;
+}
+
+.main-footer a {
+    color: #3b82f6;
+    text-decoration: none;
+}
+
+.main-footer a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .app-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .input-section {
+        flex-direction: column;
+    }
+    
+    .side-ad {
+        position: static;
+        order: -1;
+    }
+    
+    .side-ad .ad-placeholder {
+        width: 100%;
+        height: 100px;
+        writing-mode: horizontal-tb;
+        text-orientation: mixed;
+    }
+    
+    .preview-section {
+        position: static;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    
+    .main-header h1 {
+        font-size: 2rem;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+    }
+    
+    .share-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .top-ad .ad-placeholder, .bottom-ad .ad-placeholder {
+        width: 320px;
+        height: 50px;
+    }
+    
+    .resume-content {
+        padding: 20px;
+        font-size: 9pt;
+    }
+    
+    .entry-header {
+        flex-direction: column;
+        gap: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-group {
+        padding: 15px;
+    }
+    
+    .resume-content {
+        padding: 15px;
+        font-size: 8.5pt;
+    }
+    
+    .resume-name {
+        font-size: 18pt;
+    }
+    
+    .top-ad .ad-placeholder, .bottom-ad .ad-placeholder {
+        width: 280px;
+        height: 50px;
+        font-size: 0.8rem;
+    }
+}
+
+/* Print Styles for PDF */
+@media print {
+    body {
+        background: white;
+    }
+    
+    .container {
+        max-width: none;
+        padding: 0;
+    }
+    
+    .input-section, .social-sharing, .ad-space, .main-footer {
+        display: none;
+    }
+    
+    .app-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .resume-preview {
+        box-shadow: none;
+        border-radius: 0;
+    }
+    
+    .resume-content {
+        padding: 0.5in;
+        font-size: 11pt;
+    }
+}

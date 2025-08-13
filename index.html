@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>AI-Powered Resume Generator - Job Tailored</title>
+        <link rel="stylesheet" href="styles.css?v=4" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+        <!-- Google Analytics -->
+        <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"
+        ></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
+            gtag("config", "GA_MEASUREMENT_ID");
+        </script>
+    </head>
+    <body>
+        <div class="container">
+            <header class="main-header">
+                <h1><i class="fas fa-file-alt"></i> AI Resume Generator</h1>
+                <p>Create job-tailored, ATS-friendly resumes in seconds</p>
+            </header>
+
+            <div class="app-content">
+                <!-- Input Form Section -->
+                <div class="input-section">
+                    <!-- Progress indicator -->
+                    <div class="progress-indicator">
+                        <div class="progress-steps">
+                            <div class="step active" data-step="0">
+                                <div class="step-number">1</div>
+                                <div class="step-label">Job Title</div>
+                            </div>
+                            <div class="step" data-step="1">
+                                <div class="step-number">2</div>
+                                <div class="step-label">Contact</div>
+                            </div>
+                            <div class="step" data-step="2">
+                                <div class="step-number">3</div>
+                                <div class="step-label">Experience</div>
+                            </div>
+                            <div class="step" data-step="3">
+                                <div class="step-number">4</div>
+                                <div class="step-label">Education</div>
+                            </div>
+                            <div class="step" data-step="4">
+                                <div class="step-number">5</div>
+                                <div class="step-label">Skills</div>
+                            </div>
+                        </div>
+                        <div class="progress-bar">
+                            <div
+                                class="progress-fill"
+                                style="width: 16.67%"
+                            ></div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation buttons at top -->
+                    <div class="carousel-navigation">
+                        <button
+                            type="button"
+                            id="prevBtn"
+                            class="nav-btn"
+                            disabled
+                        >
+                            <i class="fas fa-arrow-left"></i> Previous
+                        </button>
+                        <button type="button" id="nextBtn" class="nav-btn">
+                            Next <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+
+                    <div class="form-container">
+                        <div class="carousel-container">
+                            <!-- Step 1: Job Title -->
+                            <div class="carousel-step active" data-step="0">
+                                <h2>
+                                    <i class="fas fa-briefcase"></i> Target Job
+                                    Title
+                                </h2>
+                                <p class="step-description">
+                                    This will customize your entire resume for
+                                    the role you're applying for
+                                </p>
+
+                                <div class="form-group priority">
+                                    <label for="jobTitle">
+                                        What position are you applying for? *
+                                        <span
+                                            class="tooltip"
+                                            data-tip="This drives all resume customization"
+                                            >?</span
+                                        >
+                                    </label>
+                                    <input
+                                        type="text"
+                                        id="jobTitle"
+                                        placeholder="e.g., Software Engineer, Marketing Manager, Nurse"
+                                        required
+                                    />
+                                    <div
+                                        class="job-category"
+                                        id="jobCategory"
+                                    ></div>
+                                </div>
+                            </div>
+
+                            <!-- Step 2: Contact Information -->
+                            <div class="carousel-step" data-step="1">
+                                <h2>
+                                    <i class="fas fa-user"></i> Contact
+                                    Information
+                                </h2>
+                                <p class="step-description">
+                                    Your professional contact details
+                                </p>
+
+                                <div class="form-group">
+                                    <label for="fullName">Full Name *</label>
+                                    <input
+                                        type="text"
+                                        id="fullName"
+                                        placeholder="John Smith"
+                                        required
+                                    />
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="phone">Phone</label>
+                                        <input
+                                            type="tel"
+                                            id="phone"
+                                            placeholder="555-123-4567"
+                                        />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Email *</label>
+                                        <input
+                                            type="email"
+                                            id="email"
+                                            placeholder="john.smith@email.com"
+                                            required
+                                        />
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="linkedin"
+                                            >LinkedIn URL</label
+                                        >
+                                        <input
+                                            type="url"
+                                            id="linkedin"
+                                            placeholder="linkedin.com/in/johnsmith"
+                                        />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="location">Location</label>
+                                        <input
+                                            type="text"
+                                            id="location"
+                                            placeholder="New York, NY"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Step 3: Work Experience -->
+                            <div class="carousel-step" data-step="2">
+                                <h2>
+                                    <i class="fas fa-briefcase"></i> Work
+                                    Experience
+                                </h2>
+                                <p class="step-description">
+                                    Your professional work history
+                                </p>
+
+                                <div id="experienceContainer">
+                                    <div class="experience-item" data-index="0">
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label>Company Name</label>
+                                                <input
+                                                    type="text"
+                                                    class="company"
+                                                    placeholder="Tech Corp"
+                                                />
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Job Title</label>
+                                                <input
+                                                    type="text"
+                                                    class="jobTitle"
+                                                    placeholder="Software Developer"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label>Start Date</label>
+                                                <input
+                                                    type="text"
+                                                    class="startDate"
+                                                    placeholder="Jan 2022"
+                                                />
+                                            </div>
+                                            <div class="form-group">
+                                                <label>End Date</label>
+                                                <input
+                                                    type="text"
+                                                    class="endDate"
+                                                    placeholder="Present"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Location</label>
+                                            <input
+                                                type="text"
+                                                class="jobLocation"
+                                                placeholder="San Francisco, CA"
+                                            />
+                                        </div>
+                                        <div class="form-group">
+                                            <label
+                                                >Key Achievements (3-4 bullet
+                                                points)</label
+                                            >
+                                            <textarea
+                                                class="achievements"
+                                                rows="4"
+                                                placeholder="• Developed web applications using React and Node.js&#10;• Improved system performance by 40%&#10;• Led a team of 3 junior developers&#10;• Implemented CI/CD pipelines"
+                                            ></textarea>
+                                            <div
+                                                class="suggestions achievements-suggestions"
+                                                data-index="0"
+                                            ></div>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            class="remove-btn"
+                                            onclick="removeExperience(0)"
+                                        >
+                                            <i class="fas fa-trash"></i> Remove
+                                        </button>
+                                    </div>
+                                </div>
+                                <button
+                                    type="button"
+                                    id="addExperience"
+                                    class="add-btn"
+                                >
+                                    <i class="fas fa-plus"></i> Add Experience
+                                </button>
+                            </div>
+
+                            <!-- Step 4: Education -->
+                            <div class="carousel-step" data-step="3">
+                                <h2>
+                                    <i class="fas fa-graduation-cap"></i>
+                                    Education
+                                </h2>
+                                <p class="step-description">
+                                    Your educational background
+                                </p>
+
+                                <div id="educationContainer">
+                                    <div class="education-item" data-index="0">
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label>School Name</label>
+                                                <input
+                                                    type="text"
+                                                    class="school"
+                                                    placeholder="University of California"
+                                                />
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Degree</label>
+                                                <input
+                                                    type="text"
+                                                    class="degree"
+                                                    placeholder="Bachelor of Science in Computer Science"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label>Graduation Year</label>
+                                                <input
+                                                    type="text"
+                                                    class="gradYear"
+                                                    placeholder="2021"
+                                                />
+                                            </div>
+                                            <div class="form-group">
+                                                <label>
+                                                    GPA (Optional)
+                                                    <span
+                                                        class="tooltip"
+                                                        data-tip="Only included if 3.5 or higher - lower GPAs are automatically hidden"
+                                                        >?</span
+                                                    >
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    class="gpa"
+                                                    placeholder="3.8/4.0"
+                                                />
+                                            </div>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            class="remove-btn"
+                                            onclick="removeEducation(0)"
+                                        >
+                                            <i class="fas fa-trash"></i> Remove
+                                        </button>
+                                    </div>
+                                </div>
+                                <button
+                                    type="button"
+                                    id="addEducation"
+                                    class="add-btn"
+                                >
+                                    <i class="fas fa-plus"></i> Add Education
+                                </button>
+                            </div>
+
+                            <!-- Step 5: Skills -->
+                            <div class="carousel-step" data-step="4">
+                                <h2><i class="fas fa-cogs"></i> Skills</h2>
+                                <p class="step-description">
+                                    Your professional skills and competencies
+                                </p>
+
+                                <div class="form-group">
+                                    <label for="skills">
+                                        Skills (comma-separated)
+                                        <span
+                                            class="tooltip"
+                                            data-tip="Add job-relevant keywords for ATS"
+                                            >?</span
+                                        >
+                                    </label>
+                                    <textarea
+                                        id="skills"
+                                        rows="3"
+                                        placeholder="Skills will be suggested based on your job title..."
+                                    ></textarea>
+                                    <div
+                                        class="suggestions"
+                                        id="skillsSuggestions"
+                                    ></div>
+                                </div>
+
+                                <!-- Action Buttons on final step -->
+                                <div class="action-buttons">
+                                    <button
+                                        type="button"
+                                        id="downloadPdf"
+                                        class="btn-primary"
+                                    >
+                                        <i class="fas fa-download"></i> Download
+                                        PDF
+                                    </button>
+                                    <button
+                                        type="button"
+                                        id="clearForm"
+                                        class="btn-secondary"
+                                    >
+                                        <i class="fas fa-refresh"></i> Clear All
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resume Preview Section with Side Ads -->
+                <div class="preview-wrapper">
+                    <!-- Left Ad -->
+                    <div class="ad-space side-ad">
+                        <div class="ad-placeholder">
+                            Advertisement<br />300x600
+                        </div>
+                    </div>
+
+                    <!-- Preview Section -->
+                    <div class="preview-section">
+                        <div class="preview-header">
+                            <h2>Live Preview</h2>
+                            <div class="preview-controls">
+                                <div class="template-selector">
+                                    <label for="template">Template:</label>
+                                    <select id="template">
+                                        <option value="modern">Modern</option>
+                                        <option value="classic">Classic</option>
+                                        <option value="minimal">Minimal</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="resume-preview" id="resumePreview">
+                            <div class="resume-content">
+                                <!-- Resume content will be dynamically generated -->
+                                <div class="preview-placeholder">
+                                    <i class="fas fa-file-alt"></i>
+                                    <p>
+                                        Enter your job title to see a tailored
+                                        resume preview
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Ad -->
+                    <div class="ad-space side-ad">
+                        <div class="ad-placeholder">
+                            Advertisement<br />300x600
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social Sharing -->
+            <div class="social-sharing">
+                <h3>Share This Tool</h3>
+                <div class="share-buttons">
+                    <button
+                        class="share-btn facebook"
+                        onclick="shareOnFacebook()"
+                    >
+                        <i class="fab fa-facebook-f"></i> Facebook
+                    </button>
+                    <button
+                        class="share-btn twitter"
+                        onclick="shareOnTwitter()"
+                    >
+                        <i class="fab fa-twitter"></i> Twitter
+                    </button>
+                    <button
+                        class="share-btn linkedin"
+                        onclick="shareOnLinkedIn()"
+                    >
+                        <i class="fab fa-linkedin-in"></i> LinkedIn
+                    </button>
+                </div>
+            </div>
+
+            <!-- Bottom Ad Space -->
+            <div class="ad-space bottom-ad">
+                <div class="ad-placeholder">Advertisement Space - 728x90</div>
+            </div>
+        </div>
+
+        <footer class="main-footer">
+            <p>
+                Powered by AI Resume Generator | © 2025 |
+                <a href="#privacy">Privacy Policy</a> |
+                <a href="#terms">Terms of Service</a>
+            </p>
+        </footer>
+
+        <script src="job-data.js?v=4"></script>
+        <script src="script.js?v=4"></script>
+    </body>
+</html>
