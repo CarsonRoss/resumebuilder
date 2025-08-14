@@ -18,6 +18,28 @@ body {
     padding: 20px;
 }
 
+/* Mode selection overlay */
+.mode-overlay { position: fixed; inset: 0; background: #f8fafc; z-index: 2147483647; display: none; align-items: center; justify-content: center; padding: 20px; }
+.mode-content { background: transparent; border-radius: 0; padding: 0; width: 100%; max-width: none; box-shadow: none; display: flex; flex-direction: column; align-items: center; gap: 18px; }
+.mode-title { text-align: center; color: #0f172a; margin-bottom: 18px; font-size: 1.6rem; }
+.mode-buttons { display: grid; grid-template-columns: repeat(2, auto); gap: 20px; place-items: center; }
+.mode-card { appearance: none; border: none; background: transparent; cursor: pointer; border-radius: 14px; padding: 0; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+.mode-card .card-inner { border-radius: 14px; background: #ffffff; border: 2px solid #e5e7eb; padding: 18px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; width: clamp(220px, 34vw, 340px); aspect-ratio: 1 / 1; text-align: center; }
+.mode-card .card-icon { font-size: 2.8rem; color: #2563eb; }
+.mode-card .card-title { font-weight: 600; color: #0f172a; font-size: 1.25rem; }
+.mode-card .card-desc { font-size: 1rem; color: #475569; }
+.mode-card:hover { transform: translateY(-2px); box-shadow: 0 10px 18px rgba(2, 6, 23, 0.08); }
+
+/* AI rainbow border */
+.mode-card.ai .card-inner { position: relative; border: 1px solid transparent; }
+.mode-card.ai .card-inner::before { content: ""; position: absolute; inset: -2px; z-index: -1; border-radius: 16px; background: linear-gradient(90deg, #ff6ec7, #ffdd00, #00e5ff, #7c4dff, #ff6ec7); background-size: 300% 300%; animation: rainbow 6s linear infinite; }
+.mode-card.ai .card-inner::after { content: ""; position: absolute; inset: 0; border-radius: 14px; background: #ffffff; z-index: -1; margin: 2px; }
+@keyframes rainbow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+
+@media (max-width: 640px) {
+    .mode-buttons { grid-template-columns: 1fr; }
+}
+
 /* Header */
 .main-header {
     text-align: center;
