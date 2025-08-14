@@ -17,6 +17,32 @@ document.addEventListener("DOMContentLoaded", function () {
         page_title: "Resume Generator",
         page_location: window.location.href,
     });
+
+    // Show mode chooser on first visit
+    try {
+        const seenKey = "rb_mode_seen";
+        const overlay = document.getElementById("modeOverlay");
+        const chooseBasic = document.getElementById("chooseBasic");
+        const chooseAI = document.getElementById("chooseAI");
+        const hasSeen = localStorage.getItem(seenKey) === "1";
+        if (overlay && chooseBasic && chooseAI && !hasSeen) {
+            overlay.style.display = "flex";
+            const closeOverlay = (mode) => {
+                overlay.style.display = "none";
+                localStorage.setItem(seenKey, "1");
+                gtag("event", "mode_selected", { mode });
+                if (mode === "ai") {
+                    // Optionally pre-enable AI helpers or highlight features
+                    const aiStatus = document.getElementById("aiStatus");
+                    if (aiStatus) aiStatus.textContent = "AI mode enabled. Enter your job title to get suggestions.";
+                }
+            };
+            chooseBasic.addEventListener("click", () => closeOverlay("standard"));
+            chooseAI.addEventListener("click", () => closeOverlay("ai"));
+        }
+    } catch (e) {
+        console.warn("Mode overlay init failed", e);
+    }
 });
 
 // Initialize all event listeners
