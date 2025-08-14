@@ -37,6 +37,28 @@
         ></script>
     </head>
     <body>
+        <!-- Mode Selection Overlay (shown on first visit) -->
+        <div id="modeOverlay" class="mode-overlay" style="display: none;">
+            <div class="mode-content">
+                <h2 class="mode-title">Choose your resume builder</h2>
+                <div class="mode-buttons">
+                    <button id="chooseBasic" class="mode-card basic">
+                        <div class="card-inner">
+                            <div class="card-icon"><i class="fas fa-file-alt"></i></div>
+                            <div class="card-title">Standard Builder</div>
+                            <div class="card-desc">Clean templates with manual control</div>
+                        </div>
+                    </button>
+                    <button id="chooseAI" class="mode-card ai">
+                        <div class="card-inner">
+                            <div class="card-icon"><i class="fas fa-magic"></i></div>
+                            <div class="card-title">AI Builder</div>
+                            <div class="card-desc">AI-powered suggestions (GPT-5)</div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
         <div class="container">
             <header class="main-header">
                 <h1><i class="fas fa-file-alt"></i> AI Resume Generator</h1>
@@ -512,12 +534,48 @@
         <footer class="main-footer">
             <p>
                 Powered by AI Resume Generator | © 2025 |
-                <a href="#privacy">Privacy Policy</a> |
+                <a href="privacy.html">Privacy Policy</a> |
                 <a href="#terms">Terms of Service</a>
             </p>
         </footer>
 
         <script src="job-data.js?v=4"></script>
         <script src="script.js?v=4"></script>
+        <script>
+            // Landing mode: show only two buttons on first visit
+            document.addEventListener('DOMContentLoaded', function () {
+                try {
+                    const seenKey = 'rb_mode_seen';
+                    const hasSeen = localStorage.getItem(seenKey) === '1';
+                    const overlay = document.getElementById('modeOverlay');
+                    const container = document.querySelector('.container');
+                    const chooseBasic = document.getElementById('chooseBasic');
+                    const chooseAI = document.getElementById('chooseAI');
+
+                    const enterBuilder = (mode) => {
+                        if (overlay) overlay.style.display = 'none';
+                        if (container) container.style.display = 'block';
+                        localStorage.setItem(seenKey, '1');
+                        if (window.gtag) gtag('event', 'mode_selected', { mode });
+                        if (mode === 'ai') {
+                            const aiStatus = document.getElementById('aiStatus');
+                            if (aiStatus) aiStatus.textContent = 'AI mode enabled. Enter your job title to get suggestions.';
+                        }
+                    };
+
+                    if (!hasSeen) {
+                        if (overlay) overlay.style.display = 'flex';
+                        if (container) container.style.display = 'none';
+                        if (chooseBasic) chooseBasic.onclick = () => enterBuilder('standard');
+                        if (chooseAI) chooseAI.onclick = () => enterBuilder('ai');
+                    } else {
+                        if (overlay) overlay.style.display = 'none';
+                        if (container) container.style.display = 'block';
+                    }
+                } catch (e) {
+                    console.warn('Landing mode init failed', e);
+                }
+            });
+        </script>
     </body>
 </html>
